@@ -14,9 +14,9 @@ Compound Scaling: This method scales the network's width, depth, and resolution 
 
 In the provided code, the pre-trained EfficientNet-B0 model is modified by replacing its classifier with a custom one to fit the specific number of bird species classes:
 
-```python
 # Load pre-trained EfficientNet B0 model
 model = models.efficientnet_b0(pretrained=True)
+```python
 
 # Modify the classifier
 num_ftrs = model.classifier[1].in_features
@@ -27,12 +27,27 @@ model.classifier = nn.Sequential(
     nn.Linear(256, 50)
 )
 ```
+## Dataset Information
+The dataset used for this competition consists of:
 
+Training Set: 15,834 low-resolution bird images (64x64 pixels) stored in the train folder.
+
+Test Set: 6,786 low-resolution bird images (64x64 pixels) stored in the test folder.
+
+Upscaled Training Set: The low-resolution training images upscaled to 256x256 pixels, stored in the upscale_train folder.
+
+Metadata Files:
+
+train.csv: Contains paths to low-resolution and upscaled images, along with their corresponding labels.
+
+test.csv: Contains paths to low-resolution test images and their unique IDs.
+
+sample_submission.csv: Provides the format for submitting predicted labels.
 
 ## Competition Information
 This model can be applied to competitions like the Dacon Low-Resolution Bird Image Classification AI Competition. The competition aims to develop AI algorithms that can classify bird species from low-resolution images (64x64 pixels). Participants are encouraged to design efficient models that can perform well under these constraints, contributing to biodiversity conservation efforts.
 
-Improvements & Future Updates
+## Improvements & Future Updates
 Data Augmentation: Implementing additional data augmentation techniques, such as AutoAugment or RandAugment, could further enhance model performance by increasing the diversity of the training data.
 
 Transfer Learning: The model is already using transfer learning by starting with a pre-trained EfficientNet-B0. However, experimenting with different pre-trained models or fine-tuning on other datasets could provide insights into the model's adaptability.
@@ -45,3 +60,10 @@ EfficientNetV2: Upgrading to EfficientNetV2 models, which offer faster training 
 
 ## Conclusion
 The code effectively utilizes EfficientNet-B0 for a bird classification task, leveraging its efficient architecture and high accuracy. By fine-tuning the model and adjusting its classifier, it demonstrates how EfficientNet can be adapted for specific classification tasks. Future improvements could involve exploring different EfficientNet variants, enhancing data augmentation strategies, and optimizing hyperparameters for better performance. This model can be useful in real-world applications such as low-resolution image classification.
+
+Additional Notes
+Model Performance Evaluation: The model's performance is evaluated using metrics such as accuracy and F1 score. These metrics provide insights into the model's ability to classify bird species accurately.
+
+Learning Environment: The model was trained using Google Colab with an NVIDIA Tesla V100 GPU, ensuring efficient computation and fast training times.
+
+Future Comparisons: Comparing the performance of EfficientNet-B0 with other architectures like ResNet and Inception could provide valuable insights into its generalizability and efficiency.
